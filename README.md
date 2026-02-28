@@ -1,6 +1,6 @@
 # 🕐 Cuboid — ESP32 Smart Clock
 
-A compact smart clock based on **ESP32-C3** with OLED display, weather, Google Calendar integration, alarm, night mode and full web configuration — all in a 3D-printed enclosure.
+A compact smart clock based on **ESP32-C6** with OLED display, weather, Google Calendar integration, alarm, night mode and full web configuration — all in a 3D-printed enclosure.
 
 > 📦 **3D Model on MakerWorld:** [Mini ESP32 Clock & Media](https://makerworld.com/it/models/2105366-mini-esp32-clock-media#profileId-2277121)
 
@@ -58,7 +58,7 @@ Install all from the Arduino Library Manager (`Sketch → Include Library → Ma
 
 ```
 
-Then: `Tools → Board → esp32 → ESP32C3 Dev Module`
+Then: `Tools → Board → esp32 → ESP32C6 Dev Module`
 
 ---
 
