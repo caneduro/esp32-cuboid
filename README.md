@@ -269,11 +269,6 @@ Pull requests and issues are welcome! If you improve the enclosure design or add
 This project is actively being developed. Here are some of the planned features and current work-in-progress fixes:
 
 **✨ Upcoming Features:**
-- **Auto Timezone via IP:** Implement IP-based geolocation to automatically fetch and set the correct timezone/offset on the first boot, avoiding manual configuration.
-- **System Info Screen:** Add a dedicated display mode (accessible via the physical button) to quickly show the device's IP address, WiFi connection status, and other useful system metrics right on the OLED.
-- **Improved 3D Enclosure:** Design and release a completely new, optimized 3D-printable case on MakerWorld.
-
-**🐛 Known Issues & Working Fixes:**
-- **Font Scaling:** Fix text wrapping issues when using the larger "Mono Bold" font for the clock.
-- **Audio Feedback:** Improve buzzer logic so that confirmation sounds play reliably when saving settings from the Web UI (especially on first setup).
-- **Alarm Icon Logic:** Refine the alarm icon to show a filled circle if ringing tomorrow, an empty circle if set but skipping tomorrow, and hidden if completely disabled.
+[ ] **Auto Timezone via IP:** Implement IP-based geolocation to automatically fetch and set the correct timezone/offset on the first boot, avoiding manual configuration.
+[ ] **System Info Screen:** Add a dedicated display mode (accessible via the physical button) to quickly show the device's IP address, WiFi connection status, and other useful system metrics right on the OLED.
+[ ] **Improved 3D Enclosure:** Design and release a completely new, optimized 3D-printable case on MakerWorld.
