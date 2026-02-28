@@ -53,9 +53,11 @@ Install all from the Arduino Library Manager (`Sketch → Include Library → Ma
 | ArduinoOTA | (built-in with ESP32 core) |
 
 **Board:** Install **ESP32 by Espressif** via `File → Preferences → Board Manager URL`:
+```text
+[https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json](https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json)
+
 ```
-https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
-```
+
 Then: `Tools → Board → esp32 → ESP32C3 Dev Module`
 
 ---
@@ -80,32 +82,38 @@ Once connected to your network, open `http://cuboid.local` (or the IP shown on t
 ### Config page sections:
 
 **⏰ Alarm & Time**
-- Enable/disable alarm, set time and active days
-- Choose ringtone pattern
-- Set UTC offset and Auto DST
+
+* Enable/disable alarm, set time and active days
+* Choose ringtone pattern
+* Set UTC offset and Auto DST
 
 **🎨 Personalization**
-- Clock font (Sans Bold / Sans / Serif Bold)
-- Date format (DD/MM/YYYY, MM/DD/YYYY, YYYY/MM/DD, long formats)
-- Auto clock return timeout (minutes)
+
+* Clock font (Sans Bold / Sans / Serif Bold)
+* Date format (DD/MM/YYYY, MM/DD/YYYY, YYYY/MM/DD, long formats)
+* Auto clock return timeout (minutes)
 
 **🌙 Night Mode**
-- Enable/disable, set start/end times
-- Wake duration (seconds) when button is pressed during night
+
+* Enable/disable, set start/end times
+* Wake duration (seconds) when button is pressed during night
 
 **🌤 Weather & Calendar**
-- OpenWeatherMap API key and city name → [Get free key](https://home.openweathermap.org/api_keys)
-- Google Apps Script URL for calendar integration (see below)
+
+* OpenWeatherMap API key and city name → [Get free key](https://home.openweathermap.org/api_keys)
+* Google Apps Script URL for calendar integration (see below)
 
 **📶 WiFi & System**
-- Change WiFi network and password
-- Change interface language
+
+* Change WiFi network and password
+* Change interface language
 
 ### Advanced page (`/advanced`):
-- Flash firmware from browser (.bin file)
-- Set OTA username/password for Arduino IDE OTA
-- Live system info (chip, heap, temperature, uptime)
-- Live WiFi details (RSSI, channel, security, 802.11 flags)
+
+* Flash firmware from browser (.bin file)
+* Set OTA username/password for Arduino IDE OTA
+* Live system info (chip, heap, temperature, uptime)
+* Live WiFi details (RSSI, channel, security, 802.11 flags)
 
 ---
 
@@ -146,6 +154,7 @@ function doGet() {
     JSON.stringify({ hasEvent: true, events: result })
   ).setMimeType(ContentService.MimeType.JSON);
 }
+
 ```
 
 3. Click **Deploy → New deployment → Web App**
@@ -157,7 +166,7 @@ function doGet() {
 ## 🎮 Button Controls
 
 | Action | Result |
-|--------|--------|
+| --- | --- |
 | Short press | Cycle through modes: Clock → Calendar → Weather → Clock |
 | Long press (on Weather screen) | Switch to Forecast view |
 | Long press (on Calendar, multiple events) | Next event |
@@ -167,37 +176,37 @@ function doGet() {
 
 ---
 
-## 🏗 3D Printed Enclosure
+## 🏗 3D Printed Enclosure & Assembly
 
-The enclosure is designed for Bambu Lab printers and is available on MakerWorld:
-(i will make a better one someday...)
+> ⚠️ **Notice for 3D files & Assembly:** The `.3mf` print files and the detailed step-by-step assembly photos are temporarily hosted in my older repository.
+> 🔗 **[View Assembly Photos & Hardware Guide Here](https://www.google.com/search?q=https://github.com/caneduro/esp32-clock-media%23hardware--assembly)**
+
+*Note: That older `esp32-clock-media` project relies on a Python script method that I am planning to deprecate. That repository will eventually be closed or archived unless I find a better way to make it work. However, the physical enclosure and assembly instructions remain 100% compatible with this **Cuboid** project.*
+
+### 📦 MakerWorld
+
+You can also find the ready-to-print profiles on MakerWorld. I plan to update this page soon and release completely redesigned, improved models in the future!
 👉 **[Mini ESP32 Clock & Media — MakerWorld](https://makerworld.com/it/models/2105366-mini-esp32-clock-media#profileId-2277121)**
 
-### Print settings (recommended):
-- **Material:** PLA or PETG
-- **Layer height:** 0.2 mm
-- **Infill:** 15–20%
-- **Supports:** Only where needed (check the model)
-- **Printer:** Bambu Lab A1 / P1 / X1 or compatible
+### Quick Print Settings
 
-### Assembly tips:
-- The OLED display fits in the front cutout 
-- ESP32-C3 board sits in the rear compartment
-- Route the USB cable through the back opening for power
-- The buzzer and button can be hot-glued or press-fit into their slots
-
-> The .3mf file already includes slicer settings. Open it directly in Bambu Studio.
+* **Material:** PLA or PETG
+* **Layer height:** 0.2 mm
+* **Infill:** 15–20%
+* **Supports:** Only where needed (check the model)
+* **Printer:** Bambu Lab A1 / P1 / X1 or compatible
 
 ---
 
 ## 📁 Repository Structure
 
-```
+```text
 cuboid/
 └── cuboid.ino   ← main sketch (open this in Arduino IDE)
 README.md
 .gitignore
 LICENSE
+
 ```
 
 > ⚠️ Arduino requires the sketch file to be inside a folder with the **same name** (`cuboid/cuboid.ino`). Do not rename them independently.
@@ -207,34 +216,44 @@ LICENSE
 ## 🛠 Customization
 
 ### Change hardware pins
+
 Edit the defines at the top of `cuboid.ino`:
+
 ```cpp
 #define OLED_SDA        19
 #define OLED_SCL        20
 #define BOOT_BUTTON_PIN 9
 #define BUZZER_PIN      18
+
 ```
 
 ### Disable buzzer
+
 ```cpp
 #define ENABLE_BUZZER   0
+
 ```
 
 ### Change device hostname
+
 ```cpp
 #define HOSTNAME  "cuboid"   // accessible as cuboid.local
+
 ```
 
 ### Change data refresh interval
+
 ```cpp
 const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // 2 hours in ms
+
 ```
 
 ---
 
 ## 📜 License
 
-MIT License — see [LICENSE](LICENSE) for details.  
+MIT License — see [LICENSE](https://www.google.com/search?q=LICENSE) for details.
+
 You are free to use, modify and distribute this project, including for the 3D enclosure.
 
 ---
