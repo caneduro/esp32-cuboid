@@ -15,7 +15,7 @@ A compact smart clock based on **ESP32-C3** with OLED display, weather, Google C
 - **Alarm** — 4 ringtone patterns, day-of-week selection, buzzer
 - **Night Mode** — auto screen off at set times, temporary wake on button press
 - **5 Languages** — English, Italiano, Français, Español, Deutsch
-- **Web UI** — full configuration via browser (dark/light theme)
+- **Web UI** — full configuration via browser (+ dark/light theme)
 - **OTA Updates** — update firmware wirelessly from Arduino IDE or browser (.bin upload)
 - **Auto Clock Return** — returns to clock after N minutes of inactivity on other screens
 - **Wi-Fi 6 (802.11ax)** support
