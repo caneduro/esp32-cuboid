@@ -231,21 +231,18 @@ Edit the defines at the top of `cuboid.ino`:
 
 ```cpp
 #define ENABLE_BUZZER   0
-
 ```
 
 ### Change device hostname
 
 ```cpp
 #define HOSTNAME  "cuboid"   // accessible as cuboid.local
-
 ```
 
 ### Change data refresh interval
 
 ```cpp
 const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // 2 hours in ms
-
 ```
 
 ## 🗺️ Roadmap & To-Do
@@ -256,6 +253,7 @@ This project is actively being developed. Here are some of the planned features 
 - [ ] **Auto Timezone via IP:** Implement IP-based geolocation to automatically fetch and set the correct timezone/offset on the first boot, avoiding manual configuration.
 - [ ] **System Info Screen:** Add a dedicated display mode (accessible via the physical button) to quickly show the device's IP address, WiFi connection status, and other useful system metrics right on the OLED.
 - [ ] **Improved 3D Enclosure:** Design and release a completely new, optimized 3D-printable case on MakerWorld.
+
 ---
 
 ## 📜 License
