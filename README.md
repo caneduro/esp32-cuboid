@@ -64,7 +64,7 @@ Then: `Tools → Board → esp32 → ESP32C3 Dev Module`
 
 1. Clone or download this repository
 2. Open `cuboid/cuboid.ino` in Arduino IDE
-3. Select your board (`ESP32C3 Dev Module`) and the correct COM port
+3. Select your board (`ESP32C6 Dev Module`) and the correct COM port
 4. Click **Upload**
 5. On first boot, the device starts in **AP mode** → connect your phone/PC to WiFi `ESP32-Cuboid`
 6. Open `http://192.168.4.1` or `http://cuboid.local` in your browser
