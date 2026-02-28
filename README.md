@@ -245,6 +245,7 @@ Edit the defines at the top of `cuboid.ino`:
 const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // 2 hours in ms
 ```
 
+---
 ## 🗺️ Roadmap & To-Do
 
 This project is actively being developed. Here are some of the planned features and current work-in-progress fixes:
