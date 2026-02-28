@@ -28,7 +28,7 @@ A compact smart clock based on **ESP32-C3** with OLED display, weather, Google C
 
 | Component | Detail |
 |-----------|--------|
-| MCU | ESP32-C3 (or compatible ESP32) |
+| MCU | ESP32-C6 supermini (or compatible ESP32 that fits) |
 | Display | SSD1306 128×64 OLED (I2C) |
 | Button | BOOT button (GPIO 9) |
 | Buzzer | Passive buzzer (GPIO 18) |
