@@ -35,7 +35,7 @@ A compact smart clock based on **ESP32-C3** with OLED display, weather, Google C
 | SDA | GPIO 19 |
 | SCL | GPIO 20 |
 
-To disable the buzzer, set `#define ENABLE_BUZZER 0` at the top of the sketch.
+If you don't have or want the buzzer you can disable it setting `#define ENABLE_BUZZER 0` at the top of the sketch.
 
 ---
 
