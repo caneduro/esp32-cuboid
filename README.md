@@ -199,7 +199,7 @@ function doGet() {
 * **Layer height:** 0.2 mm
 * **Infill:** 15–20%
 * **Supports:** Only where needed (check the model)
-* **Printer:** Bambu Lab A1 / P1 / X1 or compatible
+* **Printer:** Bambu Lab A1 (and A1 Mini) / P1 / X1 or compatible
 
 ---
 
