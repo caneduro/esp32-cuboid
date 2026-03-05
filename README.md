@@ -21,6 +21,7 @@ A compact smart clock based on **ESP32-C6** with OLED display, weather, Google C
 * **Web UI** — full configuration via browser (+ dark/light theme)
 * **OTA Updates** — update firmware wirelessly from Arduino IDE or browser (.bin upload)
 * **Settings Backup/Restore** — export and import all settings as a JSON file
+* **Auto-brightness** — time-based brightness scheduling (up to 8 slots, configurable from the web UI)
 * **Auto Clock Return** — returns to clock after N minutes of inactivity on other screens
 * **Wi-Fi 6 (802.11ax)** support
 * **Power management** — CPU throttles to 80 MHz when screen is off
@@ -97,6 +98,7 @@ Once connected to your network, open `http://cuboid.local` (or the IP shown on t
 * Date format (DD/MM/YYYY, MM/DD/YYYY, YYYY/MM/DD, long formats)
 * Screen-off animation and speed
 * Auto clock return timeout (minutes)
+* **Auto-brightness scheduling** — define up to 8 time/brightness slots; the display dims or brightens automatically throughout the day
 
 **🌙 Night Mode**
 
@@ -255,10 +257,9 @@ const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // 2 hours in ms
 
 **✨ Upcoming Features:**
 
-* **Auto Timezone via IP:** Implement IP-based geolocation to automatically fetch and set the correct timezone/offset on first boot.
-* **Auto-brightness Scheduling:** Define brightness levels at different times of day (e.g. dim at night, full brightness during the day) — work in progress in a separate branch.
-* **System Info Screen:** A dedicated display mode to quickly show IP address, WiFi status and other system metrics on the OLED.
-* **Improved 3D Enclosure:** Design and release a completely new, optimized 3D-printable case on MakerWorld.
+- []  **Auto Timezone via IP:** Implement IP-based geolocation to automatically fetch and set the correct timezone/offset on first boot.
+- []  **System Info Screen:** A dedicated display mode to quickly show IP address, WiFi status and other system metrics on the OLED. (they are now on the /advanced webpage)
+- [] **Improved 3D Enclosure:** Design and release a completely new, optimized 3D-printable case on MakerWorld.
 
 ---
 
