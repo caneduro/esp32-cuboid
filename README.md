@@ -4,8 +4,6 @@ A compact smart clock based on **ESP32-C6** with OLED display, weather, Google C
 
 > 📦 **3D Model on MakerWorld:** [Mini ESP32 Clock & Media](https://makerworld.com/it/models/2105366-mini-esp32-clock-media#profileId-2277121)
 
-> 📋 **[CHANGELOG](CHANGELOG.md)** — see what changed in each release.
-
 > [!IMPORTANT]
 > **Hardware & Assembly Guide:** For now, please refer to my other project [**esp32-clock-media**](https://github.com/caneduro/esp32-clock-media#hardware--assembly) for the complete hardware requirements and step-by-step assembly photos. This repository currently focuses on the updated firmware and features.
 
