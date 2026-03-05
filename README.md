@@ -4,6 +4,8 @@ A compact smart clock based on **ESP32-C6** with OLED display, weather, Google C
 
 > 📦 **3D Model on MakerWorld:** [Mini ESP32 Clock & Media](https://makerworld.com/it/models/2105366-mini-esp32-clock-media#profileId-2277121)
 
+> 📋 **[CHANGELOG](CHANGELOG.md)** — see what changed in each release.
+
 > [!IMPORTANT]
 > **Hardware & Assembly Guide:** For now, please refer to my other project [**esp32-clock-media**](https://github.com/caneduro/esp32-clock-media#hardware--assembly) for the complete hardware requirements and step-by-step assembly photos. This repository currently focuses on the updated firmware and features.
 
@@ -16,13 +18,11 @@ A compact smart clock based on **ESP32-C6** with OLED display, weather, Google C
 * **Forecast** — next-day forecast (min/max temp, description)
 * **Google Calendar** — shows upcoming events with scrolling text, supports up to 5 events
 * **Alarm** — 4 ringtone patterns, day-of-week selection, buzzer
-* **Night Mode** — auto screen off at set times, temporary wake on button press; wake timer resets on every interaction; always returns to clock on wake
-* **Screen-off animations** — 10 effects (None, Checkerboard, Swipe ×4, Diagonal, Curtain, Dissolve, Implode) with configurable step delay
-* **Wake animation** — optional reverse playback of the screen-off animation when the display turns back on
-* **Settings backup & restore** — export/import all settings as a JSON file directly from the web UI
+* **Night Mode** — auto screen off at set times, temporary wake on button press
 * **5 Languages** — English, Italiano, Français, Español, Deutsch
-* **Web UI** — full configuration via browser (dark/light theme)
+* **Web UI** — full configuration via browser (+ dark/light theme)
 * **OTA Updates** — update firmware wirelessly from Arduino IDE or browser (.bin upload)
+* **Settings Backup/Restore** — export and import all settings as a JSON file
 * **Auto Clock Return** — returns to clock after N minutes of inactivity on other screens
 * **Wi-Fi 6 (802.11ax)** support
 * **Power management** — CPU throttles to 80 MHz when screen is off
@@ -33,7 +33,7 @@ A compact smart clock based on **ESP32-C6** with OLED display, weather, Google C
 ## 🔧 Hardware
 
 | Component | Detail |
-|-----------|--------|
+| --- | --- |
 | MCU | ESP32-C6 supermini (or compatible ESP32 that fits) |
 | Display | SSD1306 128×64 OLED (I2C) |
 | Button | BOOT button (GPIO 9) |
@@ -50,7 +50,7 @@ If you don't have or want the buzzer you can disable it by setting `#define ENAB
 Install all from the Arduino Library Manager (`Sketch → Include Library → Manage Libraries`):
 
 | Library | Author |
-|---------|--------|
+| --- | --- |
 | NTPClient | Fabrice Weinberg |
 | Adafruit GFX Library | Adafruit |
 | Adafruit SSD1306 | Adafruit |
@@ -71,7 +71,7 @@ Then: `Tools → Board → esp32 → ESP32C6 Dev Module`
 ## 🚀 First Flash
 
 1. Clone or download this repository
-2. Open `cuboid.ino` in Arduino IDE
+2. Open `cuboid/cuboid.ino` in Arduino IDE
 3. Select your board (`ESP32C6 Dev Module`) and the correct COM port
 4. Click **Upload**
 5. On first boot, the device starts in **AP mode** → connect your phone/PC to WiFi `ESP32-Cuboid`
@@ -85,38 +85,41 @@ Then: `Tools → Board → esp32 → ESP32C6 Dev Module`
 
 Once connected to your network, open `http://cuboid.local` (or the IP shown on the display).
 
-### Config page sections
+### Config page sections:
 
 **⏰ Alarm & Time**
+
 * Enable/disable alarm, set time and active days
 * Choose ringtone pattern
 * Set UTC offset and Auto DST
 
 **🎨 Personalization**
+
 * Clock font (Sans Bold / Sans / Serif Bold)
 * Date format (DD/MM/YYYY, MM/DD/YYYY, YYYY/MM/DD, long formats)
+* Screen-off animation and speed
 * Auto clock return timeout (minutes)
-* Screen-off animation and step delay
-* Wake animation (mirror of screen-off effect on screen-on)
 
 **🌙 Night Mode**
+
 * Enable/disable, set start/end times
-* Wake duration (seconds) — resets on every button press
+* Wake duration (seconds) when button is pressed during night
 
 **🌤 Weather & Calendar**
+
 * OpenWeatherMap API key and city name → [Get free key](https://home.openweathermap.org/api_keys)
 * Google Apps Script URL for calendar integration (see below)
 
 **📶 WiFi & System**
+
 * Change WiFi network and password
 * Change interface language
 
-### Advanced page (`/advanced`)
+### Advanced page (`/advanced`):
 
 * Flash firmware from browser (.bin file)
 * Set OTA username/password for Arduino IDE OTA
-* **Export settings** as `cuboid-settings.json`
-* **Import settings** from a previously exported file (device reboots after import)
+* Export/import all settings as `cuboid-settings.json`
 * Live system info (chip, heap, temperature, uptime)
 * Live WiFi details (RSSI, channel, security, 802.11 flags)
 
@@ -124,18 +127,18 @@ Once connected to your network, open `http://cuboid.local` (or the IP shown on t
 
 ## 📅 Google Calendar Integration
 
-The device fetches upcoming events from Google Calendar via a Google Apps Script web app.
+The device can fetch upcoming events from Google Calendar via a Google Apps Script web app.
 
-### Setup steps
+### Setup steps:
 
 1. Go to [script.google.com](https://script.google.com) and create a new project
 2. Paste the following code:
 
-```js
+```javascript
 function doGet() {
   var cal = CalendarApp.getDefaultCalendar();
   var now = new Date();
-  var end = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+  var end = new Date(now.getTime() + 48 * 60 * 60 * 1000); // next 48 hours
   var events = cal.getEvents(now, end);
 
   if (events.length === 0) {
@@ -148,9 +151,9 @@ function doGet() {
   for (var i = 0; i < Math.min(events.length, 5); i++) {
     var e = events[i];
     var start = e.getStartTime();
-    var isToday    = (start.toDateString() === now.toDateString());
+    var isToday = (start.toDateString() === now.toDateString());
     var isTomorrow = (start.toDateString() === new Date(now.getTime() + 86400000).toDateString());
-    var prefix  = isToday ? "Today " : (isTomorrow ? "Tomorrow " : "");
+    var prefix = isToday ? "Today " : (isTomorrow ? "Tomorrow " : "");
     var timeStr = prefix + Utilities.formatDate(start, Session.getScriptTimeZone(), "HH:mm");
     result.push({ event: e.getTitle(), time: timeStr });
   }
@@ -162,35 +165,35 @@ function doGet() {
 ```
 
 3. Click **Deploy → New deployment → Web App**
-4. Set *Execute as: Me* and *Who has access: Anyone*
-5. Copy the deployment URL and paste it in the device's web UI under **Google Script URL**
+4. Set "Execute as: Me" and "Who has access: Anyone"
+5. Copy the deployment URL and paste it in the device's web UI under "Google Script URL"
 
 ---
 
 ## 🎮 Button Controls
 
 | Action | Result |
-|--------|--------|
+| --- | --- |
 | Short press | Cycle through modes: Clock → Calendar → Weather → Clock |
 | Long press (on Weather screen) | Switch to Forecast view |
 | Long press (on Calendar, multiple events) | Next event |
-| Hold 3 s | Open on-device settings menu |
 | Short press during alarm | Dismiss alarm |
-| Short press during Night Mode (screen off) | Wake screen temporarily |
-| Any press during Night Mode (screen on) | Reset wake countdown |
-| Hold 10 s | Factory reset |
+| Short press during Night Mode | Wake screen temporarily |
+| Hold 3 seconds | Open on-device Settings menu |
+| Hold 10 seconds | Factory reset |
 
 ---
 
 ## 🏗 3D Printed Enclosure & Assembly
 
-> ⚠️ **Notice for 3D files & Assembly:** The `.3mf` print files and detailed step-by-step assembly photos are temporarily hosted in my older repository.
+> ⚠️ **Notice for 3D files & Assembly:** The `.3mf` print files and the detailed step-by-step assembly photos are temporarily hosted in my older repository.
 > 🔗 **[View Assembly Photos & Hardware Guide Here](https://github.com/caneduro/esp32-clock-media#hardware--assembly)**
 
-*Note: The older `esp32-clock-media` project relies on a Python script method I'm planning to deprecate. That repository will eventually be closed or archived. However, the physical enclosure and assembly instructions remain 100% compatible with this **Cuboid** project.*
+*Note: That older `esp32-clock-media` project relies on a Python script method that I am planning to deprecate. That repository will eventually be closed or archived unless I find a better way to make it work. However, the physical enclosure and assembly instructions remain 100% compatible with this **Cuboid** project.*
 
 ### 📦 MakerWorld
 
+You can also find the ready-to-print profiles on MakerWorld. I plan to update this page soon and release completely redesigned, improved models in the future!
 👉 **[Mini ESP32 Clock & Media — MakerWorld](https://makerworld.com/it/models/2105366-mini-esp32-clock-media#profileId-2277121)**
 
 ### Quick Print Settings
@@ -199,13 +202,29 @@ function doGet() {
 * **Layer height:** 0.2 mm
 * **Infill:** 15–20%
 * **Supports:** Only where needed (check the model)
-* **Printer:** Bambu Lab A1 (and A1 Mini) / P1 / X1 or compatible
+* **Printer:** Bambu Lab A1 / P1 / X1 or compatible
+
+---
+
+## 📁 Repository Structure
+
+```
+cuboid/
+└── cuboid.ino   ← main sketch (open this in Arduino IDE)
+README.md
+CHANGELOG.md
+LICENSE
+```
+
+> ⚠️ Arduino requires the sketch file to be inside a folder with the **same name** (`cuboid/cuboid.ino`). Do not rename them independently.
 
 ---
 
 ## 🛠 Customization
 
 ### Change hardware pins
+
+Edit the defines at the top of `cuboid.ino`:
 
 ```cpp
 #define OLED_SDA        19
@@ -234,24 +253,14 @@ const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // 2 hours in ms
 
 ---
 
-## 📁 Repository Structure
-
-```
-esp32-cuboid/
-├── cuboid.ino   ← main sketch (open this in Arduino IDE)
-├── README.md
-├── CHANGELOG.md
-└── LICENSE
-```
-
----
-
 ## 🗺️ Roadmap & To-Do
 
 **✨ Upcoming Features:**
-* **Auto Timezone via IP:** IP-based geolocation to automatically set the correct timezone on first boot
-* **System Info Screen:** Dedicated OLED mode showing IP address, WiFi status and system metrics
-* **Improved 3D Enclosure:** New optimized case design on MakerWorld
+
+* **Auto Timezone via IP:** Implement IP-based geolocation to automatically fetch and set the correct timezone/offset on first boot.
+* **Auto-brightness Scheduling:** Define brightness levels at different times of day (e.g. dim at night, full brightness during the day) — work in progress in a separate branch.
+* **System Info Screen:** A dedicated display mode to quickly show IP address, WiFi status and other system metrics on the OLED.
+* **Improved 3D Enclosure:** Design and release a completely new, optimized 3D-printable case on MakerWorld.
 
 ---
 
