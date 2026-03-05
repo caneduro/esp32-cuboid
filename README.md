@@ -261,6 +261,7 @@ const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // 2 hours in ms
 - [ ]  **System Info Screen:** A dedicated display mode to quickly show IP address, WiFi status and other system metrics on the OLED. (they are now on the /advanced webpage)
 - [ ] **Improved 3D Enclosure:** Design and release a completely new, optimized 3D-printable case on MakerWorld.
 - [ ]  **System Info Update:** Add power comsumtion status like wifi status and more
+- [ ]  **Captive Portal:** eventually i will implement it to auto-open the wifi configuration page on first boot/reset with ap mode
 ---
 
 ## 📜 License
