@@ -19,6 +19,7 @@ A compact smart clock built on the **ESP32-C6 Super Mini** — shows the time, w
 | ⏰ **Alarm** | 4 ringtones, per-day scheduling |
 | 🌙 **Night Mode** | Auto screen-off on schedule, wake with button press |
 | ☀️ **Auto Brightness** | Up to 8 time-based brightness slots |
+| 💤 **Eco Mode** | Full WiFi radio shutdown between syncs — minimal power draw |
 | 🌐 **Web UI** | Full config from any browser, dark/light theme |
 | 💾 **Backup/Restore** | Export and import all settings as JSON |
 | 🛜 **Wi-Fi 6** | 802.11ax support |
@@ -75,7 +76,7 @@ After connecting to your network the clock is reachable at **`http://cuboid.loca
 | Long press on Calendar (multiple events) | Next event |
 | Short press during alarm | Dismiss |
 | Short press during Night Mode | Wake screen temporarily |
-| Hold 3 seconds | Open on-device Settings menu |
+| Hold 2 seconds | Open on-device Settings menu |
 | Hold 10 seconds | Factory reset |
 
 ---
@@ -116,6 +117,22 @@ Open `http://cuboid.local` from any browser on your network.
 - Export/import all settings as `cuboid-settings.json`
 - Live system info: chip, heap, temperature, uptime
 - Live WiFi info: RSSI, channel, security, 802.11 flags
+- **Factory Reset** — two-step confirmation wipes all settings and reboots into setup mode
+
+---
+
+## 💤 Eco Mode
+
+Eco Mode cuts power consumption by shutting down the WiFi radio completely between syncs. Enable it from the on-device settings menu (WiFi → EcoMode) or from the hardware button.
+
+When enabled:
+- The radio is stopped (`esp_wifi_stop`) after every sync cycle
+- Weather, calendar and NTP are refreshed every 2 hours; the radio powers up only for the duration of the sync
+- **Pre-alarm sync** — the radio wakes automatically 1–10 minutes before the scheduled alarm, so the time is always accurate when it fires
+- A small animated indicator (`~*` / `*~`) appears in the top-right corner of the clock face while connecting
+- If the alarm fires mid-sync, the connection is aborted immediately so the buzzer is not delayed
+
+Eco Mode is most useful on battery-powered builds or whenever the web UI is not needed during the day.
 
 ---
 
@@ -174,7 +191,8 @@ function doGet() {
 ```
 
 ```cpp
-const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // weather/calendar refresh (ms)
+const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // weather/calendar/NTP refresh in normal mode (ms)
+                                                         // also used as eco sync interval
 ```
 
 ---
@@ -224,7 +242,6 @@ Print files and assembly photos are in the older repo for now:
 - [ ] **Auto Timezone via IP** — detect timezone automatically on first boot
 - [ ] **System Info Screen** — show IP, WiFi status and metrics directly on the OLED
 - [ ] **Improved 3D Enclosure** — new optimized case on MakerWorld
-- [ ] **OTA reliability** — Arduino IDE OTA needs further investigation; browser `.bin` upload works fine in the meantime
 
 ---
 
