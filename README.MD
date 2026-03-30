@@ -242,6 +242,8 @@ Print files and assembly photos are in the older repo for now:
 - [ ] **Auto Timezone via IP** — detect timezone automatically on first boot
 - [ ] **System Info Screen** — show IP, WiFi status and metrics directly on the OLED
 - [ ] **Improved 3D Enclosure** — new optimized case on MakerWorld
+- [ ] **Display Preview on website** — Realtime monitoring/preview of what is going on on the integrated display so you can change settings without looking at it
+
 
 ---
 
