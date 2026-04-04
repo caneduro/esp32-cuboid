@@ -246,6 +246,7 @@ Print files and assembly photos are in the older repo for now:
 - [ ] **Display Preview on website** — Realtime monitoring/preview of what is going on on the integrated display so you can change settings without looking at it
 - [ ] **Full Offline Mode** — set time and date fully offline in cases where wifi is not an option (maybe wifi ap used only to set things and then they are all calculated)
 - [ ] **Multi Wifi** — set multiple wifi network and connect to them flawlessly (maybe 5 network or idk)
+- [ ] **Orientation** — add the ability to orient the clock and other things so you can use it any orientation you want
 
 
 ---
