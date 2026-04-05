@@ -20,9 +20,9 @@ A compact smart clock built on the **ESP32-C6 Super Mini** — shows the time, w
 | 🌙 **Night Mode** | Auto screen-off on schedule, wake with button press |
 | ☀️ **Auto Brightness** | Up to 8 time-based brightness slots |
 | 💤 **Eco Mode** | Full WiFi radio shutdown between syncs — minimal power draw |
-| 🌐 **Web UI** | Full config from any browser, dark/light theme |
+| 🌐 **Web UI** | Full config from any browser, dark/light theme, live OLED preview |
 | 💾 **Backup/Restore** | Export and import all settings as JSON |
-| 🛜 **Wi-Fi 6** | 802.11ax support |
+| 🛜 **Wi-Fi 6** | Native 802.11ax support via ESP32-C6 |
 | 🌍 **5 Languages** | English, Italiano, Français, Español, Deutsch |
 
 ---
@@ -88,7 +88,7 @@ Open `http://cuboid.local` from any browser on your network.
 ### ⏰ Alarm & Time
 - Enable/disable alarm, set time and active days
 - Choose ringtone (*Digital Beep*, *Nervous Cricket*, *Melodic Rise*, *Sci-Fi Siren*)
-- UTC offset and Auto DST
+- Timezone — 28 entries covering the full globe (UTC+12 → UTC−11) with city labels; unknown saved POSIX strings are preserved as a "Custom" option
 
 ### 🎨 Personalization
 - Clock font (Sans Bold / Sans / Serif Bold)
@@ -119,11 +119,29 @@ Open `http://cuboid.local` from any browser on your network.
 - Live WiFi info: RSSI, channel, security, 802.11 flags
 - **Factory Reset** — two-step confirmation wipes all settings and reboots into setup mode
 
+### 📺 Live OLED Preview
+The topbar on every page includes a **📺** button that opens a floating panel with a real-time 3× canvas replica of the display, updated every second. Three buttons — **Tap**, **Med**, and **Hold** — simulate physical button presses remotely, so you can navigate menus and change settings without touching the device.
+
+---
+
+## 🔍 On-device Settings Menu
+
+Hold the button for 2 seconds to open the settings menu on the display. Navigate with short presses, confirm with a medium hold.
+
+```
+SETTINGS
+├── Controls  →  Mute · Alarm on/off
+├── WiFi      →  Network (force AP) · Eco Mode
+├── Display   →  Screen · Brightness · Font · Night Mode · Date Format · Animation · Auto-return
+└── System    →  Language · Restart
+                 └── Info  →  CPU MHz · Temp · WiFi RSSI · Uptime  (read-only)
+```
+
 ---
 
 ## 💤 Eco Mode
 
-Eco Mode cuts power consumption by shutting down the WiFi radio completely between syncs. Enable it from the on-device settings menu (WiFi → EcoMode) or from the hardware button.
+Eco Mode cuts power consumption by shutting down the WiFi radio completely between syncs. Enable it from the on-device settings menu (WiFi → EcoMode).
 
 When enabled:
 - The radio is stopped (`esp_wifi_stop`) after every sync cycle
@@ -191,7 +209,7 @@ function doGet() {
 ```
 
 ```cpp
-const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // weather/calendar/NTP refresh in normal mode (ms)
+const unsigned long DATA_REFRESH_INTERVAL = 7200000UL;  // weather/calendar/NTP refresh interval (ms)
                                                          // also used as eco sync interval
 ```
 
@@ -203,7 +221,6 @@ Install from Arduino Library Manager (`Sketch → Include Library → Manage Lib
 
 | Library | Author |
 |---|---|
-| NTPClient | Fabrice Weinberg |
 | Adafruit GFX Library | Adafruit |
 | Adafruit SSD1306 | Adafruit |
 | U8g2 | oliver |
@@ -240,20 +257,27 @@ Print files and assembly photos are in the older repo for now:
 ## 🗺️ Roadmap
 
 - [ ] **Auto Timezone via IP** — detect timezone automatically on first boot
-- [x] **System Info Screen** — show IP, WiFi status and metrics directly on the OLED
-- [x] **Web Live Preview** — show what's going onto the display remotely
+- [x] **Info Screen** — live diagnostics (CPU · Temp · RSSI · Uptime) in the on-device settings menu
+- [x] **Live OLED Preview** — real-time display preview and button simulation in the web UI
 - [ ] **Improved 3D Enclosure** — new optimized case on MakerWorld
-- [ ] **Display Preview on website** — Realtime monitoring/preview of what is going on on the integrated display so you can change settings without looking at it
-- [ ] **Full Offline Mode** — set time and date fully offline in cases where wifi is not an option (maybe wifi ap used only to set things and then they are all calculated)
-- [ ] **Multi Wifi** — set multiple wifi network and connect to them flawlessly (maybe 5 network or idk)
-- [ ] **Orientation** — add the ability to orient the clock and other things so you can use it any orientation you want
+- [ ] **Full Offline Mode** — set time and date fully offline without WiFi
+- [ ] **Multi WiFi** — store up to N networks and connect automatically
+- [ ] **Orientation** — rotate the UI to support any mounting orientation
 
+---
+## 🤝 Contributing
+
+PRs and issues are welcome. If you improve the enclosure or add features, feel free to open a PR or share your remix on MakerWorld.
 
 ---
 
-## 📜 Changelog
+## ☕ Support the Project
 
-See [CHANGELOG.md](CHANGELOG.md) for the full version history.
+If you find Cuboid useful and want to help keep it going, a small donation goes a long way — it helps cover components for testing new hardware revisions and keeps the motivation up for future features.
+
+[![Ko-fi](https://img.shields.io/badge/Support-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/caneduro)
+
+A GitHub star is just as appreciated! ⭐
 
 ---
 
@@ -261,6 +285,6 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 
 MIT — see [LICENSE](LICENSE). Free to use, modify and distribute, including the 3D enclosure.
 
-## 🤝 Contributing
 
-PRs and issues are welcome. If you improve the enclosure or add features, feel free to open a PR or share your remix on MakerWorld.
+
+
