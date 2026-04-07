@@ -262,7 +262,7 @@ Print files and assembly photos are in the older repo for now:
 - [ ] **Improved 3D Enclosure** — new optimized case on MakerWorld
 - [ ] **Full Offline Mode** — set time and date fully offline without WiFi
 - [ ] **Multi WiFi** — store up to N networks and connect automatically
-- [ ] **Orientation** — rotate the UI to support any mounting orientation
+- [x] **Orientation** — rotate the UI to support any mounting orientation
 
 ---
 ## 🤝 Contributing
