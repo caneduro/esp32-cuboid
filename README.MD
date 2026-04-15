@@ -263,6 +263,7 @@ Print files and assembly photos are in the older repo for now:
 - [ ] **Full Offline Mode** — set time and date fully offline without WiFi
 - [ ] **Multi WiFi** — store up to N networks and connect automatically
 - [x] **Orientation** — rotate the UI to support any mounting orientation
+- ToDo Fixes and Improvements
 + - [ ] add changing alarm sound and other related things inside the settings menù on the display
 ---
 ## 🤝 Contributing
