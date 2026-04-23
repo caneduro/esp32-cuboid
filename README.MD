@@ -263,7 +263,8 @@ Print files and assembly photos are in the older repo for now:
 - [ ] **Full Offline Mode** — set time and date fully offline without WiFi
 - [ ] **Multi WiFi** — store up to N networks and connect automatically
 - [x] **Orientation** — rotate the UI to support any mounting orientation
-- [ ] **Switch to C lang and ESP-IDF** — we'll build native, scalable and separate .C files so you can change things better and update only the required files (this might be less user-friendly but it's better...)
+- [ ] **Switch to C lang and ESP-IDF** — we'll build native, scalable and separate .C files so you can change things better and update only the required files (this might be less user-friendly but it's better...).
+
 - ToDo Fixes and Improvements
 + - [x] Switch to RTOS 
 + - [x] Add changing alarm sound and other related things inside the settings menù on the display
