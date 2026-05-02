@@ -259,7 +259,7 @@ Print files and assembly photos are in the older repo for now:
 - [ ] **Auto Timezone via IP** — detect timezone automatically on first boot
 - [x] **Info Screen** — live diagnostics (CPU · Temp · RSSI · Uptime) in the on-device settings menu
 - [x] **Live OLED Preview** — real-time display preview and button simulation in the web UI
-- [ ] **Improved 3D Enclosure** — new optimized case on MakerWorld
+- [ ] **Better 3D Enclosure** — maybe i'll build a new optimized case on MakerWorld 
 - [ ] **Full Offline Mode** — set time and date fully offline without WiFi
 - [ ] **Multi WiFi** — store up to N networks and connect automatically
 - [x] **Orientation** — rotate the UI to support any mounting orientation
